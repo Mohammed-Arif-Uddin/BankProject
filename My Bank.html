@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+        crossorigin="anonymous"></script>
+    <title>My First Bank Project</title>
+    <style>
+        body {
+            padding: 100px;
+        }
+
+        .text {
+            margin-top: 50px;
+            box-shadow: 5px 5px 10px gray;
+            border-radius: 5px;
+            padding: 40px;
+        }
+
+        #nextlevel {
+            display: none;
+        }
+
+        .deposit {
+            background-color: sandybrown;
+        }
+
+        .withdraw {
+            background-color: skyblue;
+        }
+
+        .balance {
+            background-color: springgreen;
+        }
+
+        .status {
+            margin: 0px 20px;
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="login">
+        <h1 style="color: #02075d;" class="text-center">Welcome to Arif's Bank</h1>
+        <div class="text">
+            <h4>Login</h4>
+            <br>
+            <input type="text" class="form-control" placeholder="E-mail">
+            <br>
+            <input type="password" class="form-control" placeholder="Password">
+            <br>
+            <button class="btn-success" id="BS">Enter</button>
+        </div>
+    </div>
+    <div id="nextlevel">
+        <div class="row">
+            <div class="col">
+                <div class="deposit status">
+                    <h4>Deposit</h4>
+                    <h3>$ <span id="depositAmount">00</span> </h3>
+                </div>
+
+            </div>
+            <div class="col">
+                <div class="withdraw status">
+                    <h4>Withdraw</h4>
+                    <h3>$ <span id="WA">00</span></h3>
+                </div>
+            </div>
+            <div class="col">
+                <div class="balance status">
+                    <h4>Balance</h4>
+                    <h3>$ <span id="Balance">1240</span> </h3>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="text">
+                    <h2>Deposit</h2>
+                    <br>
+                    <input id="amountAdd" type="text" class="form-control" placeholder="$ amount you want to Deposit">
+                    <br>
+                    <button id="depo" class="btn-success">Deposit</button>
+                </div>
+
+            </div>
+            <div class="col">
+                <div class="text">
+                    <h2>Withdraw</h2>
+                    <br>
+                    <input id="withdrawAmount" type="text" class="form-control"
+                        placeholder="$ amount you want to Withdraw">
+                    <br>
+                    <button id="wb" class="btn-success">Withdraw</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <script>
+        //click login button
+        var BS = document.getElementById("BS");
+        BS.addEventListener("click", function () {
+            document.getElementById("login").style.display = "none";
+            document.getElementById("nextlevel").style.display = "block";
+        })
+
+        //click deposit button
+        const Deposit = document.getElementById("depo");
+        Deposit.addEventListener("click", function () {
+            const InputVar = getInputNumber("amountAdd");
+
+            Bank("depositAmount", InputVar);
+            Bank("Balance", InputVar);
+
+            document.getElementById("amountAdd").value = "";
+        })
+
+        //click withdraw button
+        const withdraw = document.getElementById("wb");
+        withdraw.addEventListener("click", function () {
+            const InputVar = getInputNumber("withdrawAmount");
+
+            Bank("WA", InputVar);
+            Bank("Balance", -1 * InputVar);
+
+            document.getElementById("withdrawAmount").value = "";
+        })
+
+        function getInputNumber(id) {
+            const term = document.getElementById(id).value;
+            const FloatVariable = parseFloat(term);
+            return FloatVariable;
+        }
+        function Bank(id, vd) {
+            const Balance = document.getElementById(id).innerText;
+            const FloatBalance = parseFloat(Balance);
+            document.getElementById(id).innerText = vd + FloatBalance;
+        }
+    </script>
+</body>
+
+</html>
